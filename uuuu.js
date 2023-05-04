@@ -76,7 +76,7 @@ function addQuestionData(obj,count){
               radioInput.name="question";
               radioInput.type="radio";
               radioInput.id=`answer_${i}`;
-              radioInput.dataset.answer=obj[`answer_${i}`];
+              radioInput.dataset.answer=obj[`name_${i}`];
               // Make First Option Selected
               if (i === 1) {
                      radioInput.checked = true;
@@ -115,9 +115,11 @@ function checkAnswer(rAnswer, count) {
        }
        console.log(`right aswer is : ${rAnswer}`)
        console.log(`Choosen Answer is :${theChoosenAnswer}`)
-       if (rAnswer === theChoosenAnswer) {
+       if (theChoosenAnswer === "") {
+              // handle case where no radio button was selected
+              theChoosenAnswer="yousef";
+       } else if (rAnswer === theChoosenAnswer) {
               rightAnswers++;
-              console.log("good")
        }
 }
 
