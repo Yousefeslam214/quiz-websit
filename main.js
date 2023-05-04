@@ -138,10 +138,15 @@ function handleBullets(){
        let arrayOfSpans = Array.from(bulletsSpan);
        arrayOfSpans.forEach((span ,index)=>{
               if(currentIndex===index){
-                     span.className='on'
+                     //span.className='on'
+                     span.classList.toggle("on");
               } else{
                      span.classList.remove("on");
+                     
+
+                     
               }
+              
        }
        )
        // for(let i=0;i<currentIndex;i++){
