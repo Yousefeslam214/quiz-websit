@@ -30,6 +30,14 @@ function getQuestions() {
                             currentIndex++;
                             checkAnswer(theRightAnswer , questionsCount)
                             console.log(theRightAnswer)
+                            // remove old question and answer area
+                            quizArea.innerHTML = "";
+                            answersArea.innerHTML = "";
+                            addQuestionData(questionsObject[currentIndex],questionsCount);
+                            //handle bullets class
+                            handleBullets();
+                            //show Results
+                            showResults(questionsCount);
                      }
               }
        }
@@ -120,4 +128,20 @@ function checkAnswer(rAnswer, count) {
               console.log("good")
        }
 }
+function handleBullets(){
+       let bulletsSpan = document.querySelectorAll(".bullets .spans span");
+       let arrayOfSpans = Array.from(bulletsSpan);
+       arrayOfSpans.forEach((span ,index)=>{
+              if(currentIndex===index){
+                     span.className='on'
+              }
+       })
+}
 
+
+function showResults(count){
+       
+       if(currentIndex === count){
+              console.log("oooooo")
+       }
+}
