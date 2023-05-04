@@ -22,9 +22,14 @@ function getQuestions() {
                      let questionsCount = questionsObject.length;
                      createBullets(questionsCount);
                      //Click on submit
+                     
                      addQuestionData(questionsObject[currentIndex],questionsCount);
+                     countdown(5,questionsCount);
+
+
                      submitButton.onclick = () => {
-                            
+                            clearInterval(countdownInterval)
+                            countdown(5,questionsCount);
                             //Get Right Answer
                             let theRightAnswer = questionsObject[currentIndex].right_answer;
                             currentIndex++;
@@ -134,14 +139,59 @@ function handleBullets(){
        arrayOfSpans.forEach((span ,index)=>{
               if(currentIndex===index){
                      span.className='on'
+              } else{
+                     span.classList.remove("on");
               }
-       })
+       }
+       )
+       // for(let i=0;i<currentIndex;i++){
+       //        arrayOfSpans.span.className.remove()
+       // }
+       
+       
 }
 
 
 function showResults(count){
-       
+       let theResults;
        if(currentIndex === count){
               console.log("oooooo")
+              quizArea.remove();
+              answersArea.remove();
+              submitButton.remove();
+              bullets.remove();
+              if (rightAnswers > count / 2 && rightAnswers < count) {
+                     theResults = `<span class="good">Good</span>, ${rightAnswers} From ${count}`;
+              } else if (rightAnswers === count) {
+                     theResults = `<span class="perfect">Perfect</span>, All Answers Is Good`;
+              } else {
+                     theResults = `<span class="bad">Bad</span>, ${rightAnswers} From ${count}`;
+              }
+              
+              resultsContainer.innerHTML = theResults;
+              resultsContainer.style.padding = "10px";
+              resultsContainer.style.backgroundColor = "white";
+              resultsContainer.style.marginTop = "10px";
+              
+       }
+}
+function countdown(duration ,count){
+       if(currentIndex<count){
+              let minutes ,seconds;
+              countdownInterval=setInterval(function(){
+                     minutes = parseInt(duration / 60);
+                     seconds = parseInt(duration % 60);
+
+                     
+                     minutes = minutes < 10 ? `0${minutes}` : minutes;
+                     seconds = seconds < 10 ? `0${seconds}` : seconds;
+
+                     countdownElement.innerHTML=`${minutes} : ${seconds}`;
+
+                     if (--duration < 0) {
+                            clearInterval(countdownInterval);
+                            submitButton.click();
+                     }
+              },1000);
        }
 }
